@@ -27,9 +27,7 @@ class NavLeft extends Component {
             return (<Menu.Item title={itme.title} key={itme.key}>{itme.title}</Menu.Item>)
             }
         )
-
     }
-
     render() {
         return (
             <div>
@@ -39,8 +37,7 @@ class NavLeft extends Component {
                 </div>
                 <Menu theme="dark">
                     {this.state.menuTreeNode}
-                </Menu>
-                this is NavLeft
+                </Menu>                
             </div>
         )
     }
