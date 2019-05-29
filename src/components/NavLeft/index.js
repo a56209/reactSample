@@ -7,6 +7,29 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 class NavLeft extends Component {
+    componentWillMount() {
+        const menuTreeNode = this.renderMenu(MenuConfig);
+        this.setState({
+            menuTreeNode
+        })
+    }
+
+    //菜单渲染（箭头函数 ）
+    renderMenu = (data) => {
+        return data.map(
+            (itme) => {
+                if (itme.children) {
+                    return (<SubMenu key={itme.key} title={itme.title}>
+                        {this.renderMenu(itme.children)}
+                    </SubMenu>)
+
+                }
+            return (<Menu.Item title={itme.title} key={itme.key}>{itme.title}</Menu.Item>)
+            }
+        )
+
+    }
+
     render() {
         return (
             <div>
@@ -15,24 +38,7 @@ class NavLeft extends Component {
                     <h1>Imooc MS</h1>
                 </div>
                 <Menu theme="dark">
-                    <SubMenu
-                        key="sub1"
-                        title={
-                            <span>
-                                <Icon type="mail" />
-                                <span>Navigation One</span>
-                            </span>
-                        }
-                    >
-                        
-                            <Menu.Item key="1">Option 1</Menu.Item>
-                            <Menu.Item key="2">Option 2</Menu.Item>
-                        
-                        
-                            <Menu.Item key="3">Option 3</Menu.Item>
-                            <Menu.Item key="4">Option 4</Menu.Item>
-                        
-                    </SubMenu>
+                    {this.state.menuTreeNode}
                 </Menu>
                 this is NavLeft
             </div>
