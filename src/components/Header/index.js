@@ -25,15 +25,13 @@ class Header extends Component {
         axios.jsonp({
             url: 'http://api.map.baidu.com/telematics/v3/weather?location=' + encodeURIComponent(city) + '&output=json&ak=3p49MVra6urFRGOT9s8UBWr2'
         }).then((res) => {
-            if (res.status == "success") {
-                //状态成功取得数据进行使用
+            if (res.status == 'success') {
                 let data = res.results[0].weather_data[0];
                 this.setState({
-                    //将状态设置进去
-                    date: data.date,
                     dayPictureUrl: data.dayPictureUrl,
-                    // weather: data.weather
-                }
+                    weather: data.weather
+                })
+            }
         })
 
     }
@@ -51,9 +49,12 @@ class Header extends Component {
                     <Col span={4} className="breadcrumb-title">首页</Col>
                     <Col span={20} className="weather">
                         <span className="date">{this.state.sysTime}</span>
-                        <span className="weather-detail">
+                        <span className="weather-img">
                             <img src={this.state.dayPictureUrl} alt="" />
-                            {/* {this.state.weather} */}
+                        </span>
+
+                        <span className="weather-detail">
+                            {this.state.weather}
                         </span>
                     </Col>
                 </Row>
