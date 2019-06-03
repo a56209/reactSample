@@ -6,6 +6,7 @@ import Admin from './admin'
 import Home from './pages/home/index'
 import Buttons from './pages/ui/buttons'
 import Nomatch from './pages/nomatch/index'
+import Modals from './pages/ui/modals'
 
 export default class IRouter extends Component {
     render() {
@@ -18,6 +19,7 @@ export default class IRouter extends Component {
                             <Switch>
                                 <Route path="/home" component={Home} />
                                 <Route path="/ui/buttons" component={Buttons} />
+                                <Route path="/ui/modals" component={Modals} />
                                 <Route component={Nomatch} />
                             </Switch>
 
