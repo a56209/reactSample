@@ -13,6 +13,7 @@ import Message from './pages/ui/messages'
 import Tabs from './pages/ui/tabs'
 import Gallery from './pages/ui/gallery'
 import Carousel from './pages/ui/carousel'
+import LoginForm from './pages/form/login'
 
 export default class IRouter extends Component {
     render() {
@@ -32,7 +33,7 @@ export default class IRouter extends Component {
                                 <Route path="/ui/tabs" component={Tabs} />
                                 <Route path="/ui/gallery" component={Gallery} />
                                 <Route path="/ui/carousel" component={Carousel} />
-                                
+                                <Route path="/form/login" component={LoginForm} />                                
                                 <Route component={Nomatch} />
                             </Switch>
 
