@@ -14,6 +14,9 @@ import Tabs from './pages/ui/tabs'
 import Gallery from './pages/ui/gallery'
 import Carousel from './pages/ui/carousel'
 import LoginForm from './pages/form/login'
+import FormRegister from './pages/form/register'
+import BasicTable from './pages/table/basicTable'
+import City from './pages/city/index'
 
 export default class IRouter extends Component {
     render() {
@@ -33,7 +36,10 @@ export default class IRouter extends Component {
                                 <Route path="/ui/tabs" component={Tabs} />
                                 <Route path="/ui/gallery" component={Gallery} />
                                 <Route path="/ui/carousel" component={Carousel} />
-                                <Route path="/form/login" component={LoginForm} />                                
+                                <Route path="/form/login" component={LoginForm} />
+                                <Route path="/form/reg" component={FormRegister} />    
+                                <Route path="/table/basic" component={BasicTable} />  
+                                <Route path="/city" component={City} />                                        
                                 <Route component={Nomatch} />
                             </Switch>
 
