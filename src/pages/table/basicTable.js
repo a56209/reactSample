@@ -65,7 +65,8 @@ class BasicTable extends Component {
             data: {
                 params: {
                     page: 1
-                }
+                },
+                isShowLoading: false
             }
         }).then((res) => {
             if (res.code == 0) {
@@ -101,13 +102,13 @@ class BasicTable extends Component {
                 title: '状态',
                 key: 'state',
                 dataIndex: 'state',
-                render(state){
+                render(state) {
                     let config = {
-                        1:'幼儿园',
-                        '2':'小学',
-                        '3':'初中',
-                        '4':'高中',
-                        '5':'大学'
+                        1: '幼儿园',
+                        '2': '小学',
+                        '3': '初中',
+                        '4': '高中',
+                        '5': '大学'
                     }
                     return config[state]
                 }

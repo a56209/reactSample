@@ -7,13 +7,15 @@ const Option = Select.Option
 const TextArea = Input.TextArea
 
 class FormRegister extends Component {
-    handleSubmit = ()=>{
+    state = {};
+    
+    handleSubmit = () => {
         let userInfo = this.props.form.getFieldsValue();
         console.log(JSON.stringify(userInfo))
         message.success(`${userInfo.userName} 恭喜你，您通过本次表单组件学习，当前密码为：${userInfo.userPwd}`)
-    }    
+    }
 
-    getBase64 = (img, callback)=>{
+    getBase64 = (img, callback) => {
         const reader = new FileReader();
         reader.addEventListener('load', () => callback(reader.result));
         reader.readAsDataURL(img);
@@ -27,26 +29,44 @@ class FormRegister extends Component {
         if (info.file.status === 'done') {
             // Get this url from response in real world.
             this.getBase64(info.file.originFileObj, imageUrl => this.setState({
-                userImg:imageUrl,
+                userImg: imageUrl,
                 loading: false,
             }));
         }
     }
 
     render() {
-        const {getFieldDecorator} = this.props.form;
-        const formItemLayout={
-            labelCol:{
-                xs:24,
-                sm:4
+        const { getFieldDecorator } = this.props.form;
+        /*  sm: 12
+            sm:{
+            span:12
+            }
+
+            offset:4 向右偏移4列
+        */
+        const formItemLayout = {
+            labelCol: {
+                xs: 24,
+                sm: 4
             },
-            wrapperCol:{
-                xs:24,
-                sm:12
+            wrapperCol: {
+                xs: 24,
+                sm: 12
             }
         }
+
+        const offsetLayout = {
+            wrapperCol: {
+                xs: 24,
+                sm: {
+                    span: 12,
+                    offset: 4
+                }
+            }
+        }
+
         const rowObject = {
-            minRows:4,maxRows:6
+            minRows: 4, maxRows: 6
         }
         return (
             <div>
@@ -93,7 +113,7 @@ class FormRegister extends Component {
                                 getFieldDecorator('age', {
                                     initialValue: 18
                                 })(
-                                    <InputNumber/>
+                                    <InputNumber />
                                 )
                             }
                         </FormItem>
@@ -115,7 +135,7 @@ class FormRegister extends Component {
                         <FormItem label="爱好" {...formItemLayout}>
                             {
                                 getFieldDecorator('interest', {
-                                    initialValue: ['2','5']
+                                    initialValue: ['2', '5']
                                 })(
                                     <Select mode="multiple">
                                         <Option value="1">游泳</Option>
@@ -133,17 +153,17 @@ class FormRegister extends Component {
                         <FormItem label="是否已婚" {...formItemLayout}>
                             {
                                 getFieldDecorator('isMarried', {
-                                    valuePropName:'checked',
+                                    valuePropName: 'checked',
                                     initialValue: true
                                 })(
-                                    <Switch checkedChildren="开" unCheckedChildren="关"/>
+                                    <Switch checkedChildren="开" unCheckedChildren="关" />
                                 )
                             }
                         </FormItem>
                         <FormItem label="生日" {...formItemLayout}>
                             {
-                                getFieldDecorator('birthday',{
-                                    initialValue:moment('2018-08-08')
+                                getFieldDecorator('birthday', {
+                                    initialValue: moment('2018-08-08')
                                 })(
                                     <DatePicker
                                         showTime
@@ -155,8 +175,8 @@ class FormRegister extends Component {
                         </FormItem>
                         <FormItem label="联系地址" {...formItemLayout}>
                             {
-                                getFieldDecorator('address',{
-                                    initialValue:'北京市海淀区奥林匹克公园'
+                                getFieldDecorator('address', {
+                                    initialValue: '北京市海淀区奥林匹克公园'
                                 })(
                                     <TextArea
                                         autosize={rowObject}
@@ -167,7 +187,7 @@ class FormRegister extends Component {
                         <FormItem label="早起时间" {...formItemLayout}>
                             {
                                 getFieldDecorator('time')(
-                                    <TimePicker/>
+                                    <TimePicker />
                                 )
                             }
                         </FormItem>
@@ -180,15 +200,18 @@ class FormRegister extends Component {
                                         action="//jsonplaceholder.typicode.com/posts/"
                                         onChange={this.handleChange}
                                     >
-                                    {this.state.userImg?<img src={this.state.userImg}/>:<Icon type="plus"/>}
+                                        {this.state.userImg ? <img src={this.state.userImg} /> : <Icon type="plus" />}
                                     </Upload>
                                 )
                             }
                         </FormItem>
                         <FormItem {...offsetLayout}>
                             {
-                                getFieldDecorator('userImg')(
-                                   <Checkbox>我已阅读过<a href="#">保密协议</a></Checkbox>
+                                getFieldDecorator('register', {
+                                    valuePropName: 'checked',
+                                    initialValue: true
+                                })(
+                                    <Checkbox>我已阅读过<a href="#">保密协议</a></Checkbox>
                                 )
                             }
                         </FormItem>
