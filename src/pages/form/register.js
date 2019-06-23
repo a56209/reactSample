@@ -6,7 +6,33 @@ const RadioGroup = Radio.Group
 const Option = Select.Option
 const TextArea = Input.TextArea
 
-class FormRegister extends Component {    
+class FormRegister extends Component {
+    handleSubmit = ()=>{
+        let userInfo = this.props.form.getFieldsValue();
+        console.log(JSON.stringify(userInfo))
+        message.success(`${userInfo.userName} 恭喜你，您通过本次表单组件学习，当前密码为：${userInfo.userPwd}`)
+    }    
+
+    getBase64 = (img, callback)=>{
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(img);
+    }
+
+    handleChange = (info) => {
+        if (info.file.status === 'uploading') {
+            this.setState({ loading: true });
+            return;
+        }
+        if (info.file.status === 'done') {
+            // Get this url from response in real world.
+            this.getBase64(info.file.originFileObj, imageUrl => this.setState({
+                userImg:imageUrl,
+                loading: false,
+            }));
+        }
+    }
+
     render() {
         const {getFieldDecorator} = this.props.form;
         const formItemLayout={
@@ -158,6 +184,16 @@ class FormRegister extends Component {
                                     </Upload>
                                 )
                             }
+                        </FormItem>
+                        <FormItem {...offsetLayout}>
+                            {
+                                getFieldDecorator('userImg')(
+                                   <Checkbox>我已阅读过<a href="#">保密协议</a></Checkbox>
+                                )
+                            }
+                        </FormItem>
+                        <FormItem {...offsetLayout}>
+                            <Button type="primary" onClick={this.handleSubmit}>注册</Button>
                         </FormItem>
                     </Form>
                 </Card>
