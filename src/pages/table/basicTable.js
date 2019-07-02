@@ -42,6 +42,10 @@ class BasicTable extends Component {
             }
         ]
 
+        data.map((itme, index) => {
+            itme.key = index
+        })
+
         this.setState({
             dataSource: data
         })
@@ -70,6 +74,9 @@ class BasicTable extends Component {
             }
         }).then((res) => {
             if (res.code == 0) {
+                res.result.list.map((item, index) => {
+                    item.key = index
+                })
                 this.setState({
                     dataSource2: res.result.list
                 })
@@ -147,6 +154,11 @@ class BasicTable extends Component {
                 dataIndex: 'time'
             }
         ]
+
+        const rowSelection = {
+            type: 'radio'
+        }
+
         return (
             <div>
                 <Card title="基础表格">
@@ -157,9 +169,18 @@ class BasicTable extends Component {
                         pagination={false}
                     />
                 </Card>
-                <Card title="动态数据渲染表格" style={{ margin: '10px 0' }}>
+                <Card title="动态数据渲染表格-mock" style={{ margin: '10px 0' }}>
                     <Table
                         bordered
+                        dataSource={this.state.dataSource2}
+                        columns={columns}
+                        pagination={false}
+                    />
+                </Card>
+                <Card title="动态数据渲染表格-mock" style={{ margin: '10px 0' }}>
+                    <Table
+                        bordered
+                        rowSelection={rowSelection}
                         dataSource={this.state.dataSource2}
                         columns={columns}
                         pagination={false}
