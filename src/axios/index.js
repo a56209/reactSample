@@ -13,7 +13,7 @@ export default class Axios {
                 //传入JsoP的对象进行操作
                 //如果返回的对象是成功,使用resolve方法进行返回
                 //debugger;//通过这个打断点
-                if (response.status == 'success') {//成功后  用resolve返回数据
+                if (response.status === 'success') {//成功后  用resolve返回数据
                     resolve(response);
                 } else {    //失败后用reject返回数据
                     reject(response.message);
@@ -42,9 +42,9 @@ export default class Axios {
                     loading = document.getElementById('ajaxLoading');
                     loading.style.display = 'none';
                 }
-                if (response.status == '200') {
+                if (response.status === 200) {
                     let res = response.data;
-                    if (res.code == '0') {
+                    if (res.code === 0) {
                         resolve(res)
                     } else {
                         Modal.info({
