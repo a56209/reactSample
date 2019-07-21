@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 import App from './App'
 import Login from './pages/login/index'
 import Admin from './admin'
+import Common from './common'
 import Home from './pages/home/index'
 import Buttons from './pages/ui/buttons'
 import Nomatch from './pages/nomatch/index'
@@ -18,17 +19,26 @@ import FormRegister from './pages/form/register'
 import BasicTable from './pages/table/basicTable'
 import HighTable from './pages/table/highTable'
 import City from './pages/city/index'
+import Order from './pages/order/index'
+import login from './pages/form/login';
 
 export default class IRouter extends Component {
     render() {
         return (
             <HashRouter>
                 <App>
+                    <Switch>
                     <Route path="/login" component={Login} />
+                    <Route path="/common" render={()=>{
+                        return <Common>
+                            <Route path="/common/order/detail/:orderId" component={Login} />
+                        </Common>
+                    }} 
+                    />
                     <Route path="/" render={() =>
                         <Admin>
                             <Switch>
-                                <Route path="/home" component={Home} />
+                                <Route path="admin/home" component={Home} />
                                 <Route path="/ui/buttons" component={Buttons} />
                                 <Route path="/ui/modals" component={Modals} />
                                 <Route path="/ui/loadings" component={Loadings} />
@@ -42,6 +52,7 @@ export default class IRouter extends Component {
                                 <Route path="/table/basic" component={BasicTable} />  
                                 <Route path="/table/high" component={HighTable} />  
                                 <Route path="/city" component={City} />                                        
+                                <Route path="/order" component={Order} />                                        
                                 <Route component={Nomatch} />
                             </Switch>
 
@@ -49,6 +60,7 @@ export default class IRouter extends Component {
 
                     } />
                     <Route path="/order/detail" component={Login} />
+                    </Switch>
                 </App>
             </HashRouter>
         )
