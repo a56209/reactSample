@@ -9,29 +9,38 @@ const Option = Select.Option
 
 export default class OrderDetail extends Component {
     state = {};
-    componentDidMount(){
+    componentDidMount() {
         // 通过this.props.match.params.  取路由中的id（router-v4）
         let orderId = this.props.match.params.orderId;
         if (orderId) {
             this.getDetailInfo(orderId)
         }
     }
-    getDetailInfo =(orderId)=>{
+    getDetailInfo = (orderId) => {
         axios.ajax({
-            url:'/order/detail',
-            data:{
-                params:{
-                    orderId:orderId
+            url: '/order/detail',
+            data: {
+                params: {
+                    orderId: orderId
                 }
             }
-        }).then((res)=>{
-            if(res.code == 0){
+        }).then((res) => {
+            if (res.code == 0) {
                 this.setState({
-                    orderInfo:res.result
+                    orderInfo: res.result
                 })
+                this.renderMap();
             }
         })
-
+    }
+    // 初始化地图
+    renderMap = () => {
+        // 创建地图实例
+        var map = new window.BMap.Map('orderDetailMap');
+        // 创建点坐标
+        var point = new window.BMap.Point(116.404, 39.915);
+        // 初始化地图， 设置中心点坐标和地图级别
+        map.centerAndZoom(point, 11);        
     }
     render() {
         // 如果orderInfo为空，返回{}
@@ -39,14 +48,14 @@ export default class OrderDetail extends Component {
         return (
             <div>
                 <Card>
-                    {/* <div id="orderDetailMap"></div> */}
-                    
+                    <div id="orderDetailMap" className="order-map"></div>
+
                     <div className="detail-items">
                         <div className="item-title">基础信息</div>
                         <ul className="detail-form">
                             <li>
                                 <div className="detail-form-left">用车模式</div>
-                                <div className="detail-form-content">{info.mode == 1?'服务区':'停车点'}</div>
+                                <div className="detail-form-content">{info.mode == 1 ? '服务区' : '停车点'}</div>
                             </li>
                             <li>
                                 <div className="detail-form-left">订单编号</div>
@@ -65,7 +74,7 @@ export default class OrderDetail extends Component {
                                 <div className="detail-form-content">{info.mobile}</div>
                             </li>
                         </ul>
-                    </div>                    
+                    </div>
                     <div className="detail-items">
                         <div className="item-title">行驶轨迹</div>
                         <ul className="detail-form">
@@ -79,7 +88,7 @@ export default class OrderDetail extends Component {
                             </li>
                             <li>
                                 <div className="detail-form-left">行程里程</div>
-                                <div className="detail-form-content">{info.distance/1000}公里</div>
+                                <div className="detail-form-content">{info.distance / 1000}公里</div>
                             </li>
                         </ul>
                     </div>
