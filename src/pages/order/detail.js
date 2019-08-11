@@ -101,13 +101,13 @@ export default class OrderDetail extends Component {
             let trackPoint = [];
             for (let i = 0; i < positionList.length; i++) {
                 let point = positionList[i];
-                // 将接口返回的坐标点转换为百度地图Api所需的坐标点
-                trackPoint.push(new window.BMap.point(point.lon, point.lat));
+                // 将接口返回的坐标点转换为百度地图Api所需的坐标点                
+                trackPoint.push(new window.BMap.Point(point.lon, point.lat));
             }
 
             // 绘制折线
             // 线的对象：颜色、宽度、透明度
-            let polyline = new window.Bmap.Polyline(trackPoint, {
+            let polyline = new window.BMap.Polyline(trackPoint, {
                 strokeColor: '#1869AD',
                 strokeWeight: 3,
                 strokeOpacity: 1
