@@ -12,6 +12,30 @@ export default class Order extends Component {
         page: 1
     }
 
+    formList = [
+        {
+            type: 'SELECT',
+            label: '城市',
+            field: 'city',
+            placeholder: '全部',
+            initialValue: '1',
+            width: 80,
+            list: [{ id: '0', name: '全部' }, { id: '1', name: '北京' }, { id: '2', name: '天津' }, { id: '3', name: '上海' }]
+        },
+        {
+            type: '时间查询',
+        },
+        {
+            type: 'SELECT',
+            label: '订单状态',
+            field: 'order_status',
+            placeholder: '全部',
+            initialValue: '1',
+            width: 100,
+            list: [{ id: '0', name: '全部' }, { id: '1', name: '进行中' }, { id: '2', name: '结束行程' }]
+        },
+    ]
+
     componentDidMount() {
         this.requestList()
     }
@@ -44,17 +68,17 @@ export default class Order extends Component {
     onRowClick = (record, index) => {
         let selectKey = [index];
         this.setState({
-            selectRowKeys:selectKey,
-            selectedItem:record
+            selectRowKeys: selectKey,
+            selectedItem: record
         })
 
     }
 
-    onSelectChange = (selectedRowKeys,selectedItem) =>{
+    onSelectChange = (selectedRowKeys, selectedItem) => {
         const record = selectedItem[0];
         this.setState({
-            selectedRowKeys:selectedRowKeys,
-            selectedItem:record
+            selectedRowKeys: selectedRowKeys,
+            selectedItem: record
         })
     }
 
@@ -74,7 +98,7 @@ export default class Order extends Component {
         const rowSelection = {
             type: 'radio',
             selectedRowKeys,
-            onChange:this.onSelectChange
+            onChange: this.onSelectChange
         }
 
         const columns = [

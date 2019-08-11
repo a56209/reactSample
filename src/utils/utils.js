@@ -1,3 +1,6 @@
+import {Select} from 'antd';
+const Option = Select.Option;
+
 export default {
     formateDate(time) {
         function checkTime(time) {
@@ -25,5 +28,19 @@ export default {
             showQuickJumper:true
         }
         return page
+    },
+
+    // 封装Option 外层接收data
+    getOptionList(data){
+        if (data){
+            return []
+        }
+
+        let options = [];
+        data.map((item)=>{
+            // 在options中添加option对象
+            options.push(<Option value={item.id} key={item.id}>{item.name}</Option>)
+        })
+        return options;
     }
 }
