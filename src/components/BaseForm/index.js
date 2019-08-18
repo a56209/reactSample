@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Input, Form, Select, DatePicker, Checkbox } from 'antd';
+import { Input, Form, Select, Button, DatePicker, Checkbox } from 'antd';
 import Utils from '../../utils/utils';
-import { Button } from 'antd/lib/radio';
 
 const FormItem = Form.Item;
 
 class FilterForm extends Component {
 
-    handleFilterSubmit = ()=>{
+    handleFilterSubmit = () => {
         let fieldsValue = this.props.form.getFieldsValue(); //获取表单的值
         this.props.filterSubmit(fieldsValue); //将子组件的值传递到父组件（order.js等）
     }
@@ -30,8 +29,9 @@ class FilterForm extends Component {
                 let width = item.width;
 
                 if (item.type == 'SELECT') {
-                    const city = <FormItem label={label} key={field}>
+                    const SELECT = <FormItem label={label} key={field}>
                         {
+                            //中括号[变量]，会将其看做变量对待
                             getFieldDecorator('[field]', {
                                 initialValue: initialValue
                             })(
@@ -68,7 +68,7 @@ class FilterForm extends Component {
                             getFieldDecorator([field], {
                                 initialValue: initialValue
                             })(
-                                <input type='text' style={{ width: width }} placeholder={placeholder} />
+                                <Input type='text' style={{ width: width }} placeholder={placeholder} />
                             )
                         }
                     </FormItem>
@@ -123,6 +123,7 @@ class FilterForm extends Component {
     render() {
         return (
             <Form layout="inline">
+                {this.initFormList()}
                 <FormItem>
                     <Button type="primary" style={{ margin: '0 20px' }} onClick={this.handleFilterSubmit}>查询</Button>
                     <Button onClick={this.reset}>重置</Button>

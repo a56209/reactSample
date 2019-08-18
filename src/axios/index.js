@@ -1,8 +1,40 @@
-import JsonP from 'jsonp'
-import axios from 'axios'
+import JsonP from 'jsonp'  //导入jsonp插件
+import axios from 'axios' //导入axios插件
 import { Modal } from 'antd'
+import Utils from '../utils/utils'
 
 export default class Axios {
+
+    static requestList(_this,url,params,isMock){
+        var data = {
+            params:params,
+            isMock  //使用Mock数据
+        };
+
+        //调用ajax拦截公共机制
+        // ES6省略语法，相当于url:url
+        this.ajax({
+            url,
+            data
+        }).then((data)=>{  //得到数据data
+            if (data && data.result){
+                // 如果data是true进行操作
+                let list = data.result.item_list.map((item,index)=>{
+                    item.key = index;
+                    return item;
+                });
+                _this.setState({
+                    list,
+                    pagination: Utils.pagination(data, (current) => {
+                        _this.params.page = current;
+                        _this.requestList();
+                      })
+                })
+            }
+        });
+    }
+
+
     static jsonp(options) {
         //使用Promise解决函数间的嵌套问题..链式调用
         return new Promise((resolve, reject) => {

@@ -151,7 +151,7 @@ export default class Order extends Component {
                 </Card>
                 <Card style={{ marginTop: 5 }}>
                     <Button type="primary" onClick={this.openOrderDetial}>订单详情</Button>
-                    <Button>结束订单</Button>
+                    <Button type="primary" style={{marginLeft:20}} >结束订单</Button>
                 </Card>
                 <div className="content-wrap">
                     <Table
