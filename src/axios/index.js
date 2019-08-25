@@ -5,9 +5,9 @@ import Utils from '../utils/utils'
 
 export default class Axios {
 
-    static requestList(_this,url,params,isMock){
+    static requestList(_this, url, params, isMock) {
         var data = {
-            params:params,
+            params: params,
             isMock  //使用Mock数据
         };
 
@@ -16,10 +16,10 @@ export default class Axios {
         this.ajax({
             url,
             data
-        }).then((data)=>{  //得到数据data
-            if (data && data.result){
+        }).then((data) => {  //得到数据data
+            if (data && data.result) {
                 // 如果data是true进行操作
-                let list = data.result.item_list.map((item,index)=>{
+                let list = data.result.item_list.map((item, index) => {
                     item.key = index;
                     return item;
                 });
@@ -28,7 +28,7 @@ export default class Axios {
                     pagination: Utils.pagination(data, (current) => {
                         _this.params.page = current;
                         _this.requestList();
-                      })
+                    })
                 })
             }
         });
@@ -57,12 +57,20 @@ export default class Axios {
 
     static ajax(options) {
         let loading;
-        if (options.data && options.data.isShowLoading !== false){
+        if (options.data && options.data.isShowLoading !== false) {
             loading = document.getElementById('ajaxLoading');
             loading.style.display = 'block';
         }
-        let baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
-        return new Promise((resolve, reject) => {            
+        // let baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
+        let baseApi = '';
+        if (options.isMock) {
+            baseApi = 'https://easy-mock.com/mock/5c0893b83b84ee1919884836/mock.api';
+        } else {
+            // 不是mock数据修改为真实接口
+            baseApi = 'https://easy-mock.com/mock/5c0893b83b84ee1919884836/mock.api';
+        }
+
+        return new Promise((resolve, reject) => {
             axios({
                 url: options.url,
                 method: 'get',
@@ -70,13 +78,13 @@ export default class Axios {
                 timeout: 5000,
                 params: (options.data && options.data.params) || ''
             }).then((response) => {
-                if (options.data && options.data.isShowLoading !== false){
+                if (options.data && options.data.isShowLoading !== false) {
                     loading = document.getElementById('ajaxLoading');
                     loading.style.display = 'none';
                 }
-                if (response.status === 200) {
+                if (response.status == '200') {
                     let res = response.data;
-                    if (res.code === "0") {
+                    if (res.code == '0') {
                         resolve(res)
                     } else {
                         Modal.info({
