@@ -39,6 +39,7 @@ class FilterForm extends Component {
                                     style={{ width: width }}
                                     placeholder={placeholder}
                                 >
+
                                     {Utils.getOptionList(item.list)}
                                 </Select>
                             )
@@ -46,7 +47,7 @@ class FilterForm extends Component {
                     </FormItem>
                     formItemList.push(SELECT);
                 } else if (item.type == '时间查询') {
-                    const begin_time = <FormItem label="订单时间" key={field}>
+                    const begin_time = <FormItem label="订单时间" key='{begin_time}'>
                         {
                             getFieldDecorator('begin_time')(
                                 <DatePicker showTime={true} placeholder={placeholder} format="YYYY-MM-DD HH:mm:ss" />
@@ -55,7 +56,7 @@ class FilterForm extends Component {
                     </FormItem>
                     formItemList.push(begin_time);
 
-                    const end_time = <FormItem label="~" colon={false} key={field}>
+                    const end_time = <FormItem label="~" colon={false} key='{end_time}'>
                         {
                             getFieldDecorator('end_time')(
                                 <DatePicker showTime={true} placeholder={placeholder} format="YYYY-MM-DD HH:mm:ss" />)
@@ -88,7 +89,7 @@ class FilterForm extends Component {
                     </FormItem>
                     formItemList.push(CHECKBOX);
                 } else if (item.type == '城市') {
-                    const city = <FormItem label="城市" key={field}>
+                    const city = <FormItem label="城市" key={item.type}>
                         {
                             getFieldDecorator('city', {
                                 initialValue: '0'

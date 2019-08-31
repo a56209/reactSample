@@ -34,15 +34,15 @@ export default {
 
     // 封装Option 外层接收data
     getOptionList(data){
-        if (data){
+        if (!data){
             return []
         }
 
         let options = [];
         data.map((item)=>{
             // 在options中添加option对象
-            options.push(<Option value={item.id} key={item.id}>{item.name}</Option>)
-        })
+            options.push(<Option value={item.id} key={item.id} >{item.name}</Option>)
+        })        
         return options;
     },
 
