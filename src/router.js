@@ -25,6 +25,7 @@ import OrderDetail from './pages/order/detail'
 import User from './pages/user/index'
 import BikeMap from './pages/map/bikeMap';
 import Bar from './pages/echarts/bar/index'
+import RichText from './pages/rich/index'
 
 export default class IRouter extends Component {
     render() {
@@ -60,7 +61,7 @@ export default class IRouter extends Component {
                                 <Route path="/user" component={User} />
                                 <Route path="/bikeMap" component={BikeMap} />
                                 <Route path="/charts/bar" component={Bar} />
-                                
+                                <Route path="/rich" component={RichText} />
                                 <Route component={Nomatch} />
                             </Switch>
 
