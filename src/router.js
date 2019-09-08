@@ -26,6 +26,7 @@ import User from './pages/user/index'
 import BikeMap from './pages/map/bikeMap';
 import Bar from './pages/echarts/bar/index'
 import RichText from './pages/rich/index'
+import PermissionUser from './pages/permission/index'
 
 export default class IRouter extends Component {
     render() {
@@ -62,6 +63,7 @@ export default class IRouter extends Component {
                                 <Route path="/bikeMap" component={BikeMap} />
                                 <Route path="/charts/bar" component={Bar} />
                                 <Route path="/rich" component={RichText} />
+                                <Route path="/permission" component={PermissionUser} />
                                 <Route component={Nomatch} />
                             </Switch>
 
